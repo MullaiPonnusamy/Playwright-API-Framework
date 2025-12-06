@@ -39,5 +39,17 @@ export const testData = {
     TokenRequest:{
     "username":"admin",
     "password":"password123"
+    },
+    
+    PatchBookingDetails: {
+    "firstname": "Elon",
+    "lastname": "Musk",
+    "totalprice": 55550,
+    "depositpaid": true,
+    "bookingdates": {
+        "checkin": "2026-01-23",
+        "checkout": "2025-01-26"
+    },
+    "additionalneeds": "Queen Bed"
     }
 }
