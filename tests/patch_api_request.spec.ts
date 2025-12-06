@@ -6,7 +6,7 @@ test.use({
     baseURL: process.env.BASE_API_URL,
 })
 
-test("Update PUT api request using Static Data file", async ({
+test("Create  PATCH api request using Static Data file", async ({
   request,
 }) => {
   // create post api request using playwright
@@ -106,39 +106,38 @@ test("Update PUT api request using Static Data file", async ({
   const tokenNo = tokenResponseBody.token;
 
 
-  // update booking details
-  //const putAPIResponse = await request.put("/booking/1", {
-  const putAPIResponse = await request.put(endPoint, {
+  // patch booking details
+  const patchAPIResponse = await request.patch(endPoint, {
     headers: {
       "Content-Type": "application/json",
       "Cookie": `token=${tokenNo}`,
     },
-    data: testData.UpdateBookingDetails,
+    data: testData.PatchBookingDetails,
   });
 
-  console.log('Update Booking Details Response using PUT API request ')
-  console.log(await putAPIResponse.json());
-  const putAPIResponseBody = await putAPIResponse.json();
-  expect(putAPIResponse.ok()).toBeTruthy();
-  expect(putAPIResponse.status()).toBe(200);
+  console.log('Patch Booking Details Response using Patch API request ')
+  console.log(await patchAPIResponse.json());
+  const patchAPIResponseBody = await patchAPIResponse.json();
+  expect(patchAPIResponse.ok()).toBeTruthy();
+  expect(patchAPIResponse.status()).toBe(200);
 
-  expect(putAPIResponseBody).toHaveProperty(
+  expect(patchAPIResponseBody).toHaveProperty(
     "firstname",
-   testData.UpdateBookingDetails.firstname
+   testData.PatchBookingDetails.firstname
   );
-  expect(putAPIResponseBody).toHaveProperty(
+  expect(patchAPIResponseBody).toHaveProperty(
     "lastname",
-    testData.UpdateBookingDetails.lastname
+    testData.PatchBookingDetails.lastname
   );
 
   // validate api response nested json obj
-  expect(putAPIResponseBody.bookingdates).toHaveProperty(
+  expect(patchAPIResponseBody.bookingdates).toHaveProperty(
     "checkin",
-    testData.UpdateBookingDetails.bookingdates.checkin
+    testData.PatchBookingDetails.bookingdates.checkin
   );
-  expect(putAPIResponseBody.bookingdates).toHaveProperty(
+  expect(patchAPIResponseBody.bookingdates).toHaveProperty(
     "checkout",
-    testData.UpdateBookingDetails.bookingdates.checkout
+    testData.PatchBookingDetails.bookingdates.checkout
   );
   /****************************************/
 
